@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Philippine Biodata Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    .section-title {
+      background: #f0f0f0;
+      padding: 6px;
+      margin-top: 20px;
+      font-weight: bold;
+      border: 1px solid #ccc;
+    }
+    .biodata-card {
+      padding: 20px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      background-color: #fff;
+    }
+    .biodata-card h4 {
+      margin-bottom: 10px;
+    }
+    .biodata-card p {
+      margin: 5px 0;
+    }
+    .biodata-display {
+      padding: 20px;
+      background: #fafafa;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+    .biodata-photo img {
+      max-width: 120px;
+      margin-bottom: 20px;
+    }
+    .biodata-photo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body class="bg-light">
+<div class="container my-5">
+  <h2 class="text-center mb-4">Biodata</h2>
+  <form id="biodataForm" class="p-4 bg-white border rounded shadow-sm">
+    <!-- PHOTO -->
+    <div class="mb-3 text-center">
+      <label for="photo" class="form-label">Upload 2x2 Photo</label>
+      <input type="file" class="form-control" id="photo" accept="image/*" />
+    </div>
+
+    <!-- Personal Info -->
+    <div class="section-title">Personal Information</div>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label>Last Name</label>
+        <input type="text" class="form-control" id="lastName" required>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label>First Name</label>
+        <input type="text" class="form-control" id="firstName" required>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label>Middle Name</label>
+        <input type="text" class="form-control" id="middleName">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 mb-3">
+        <label>Age</label>
+        <input type="number" class="form-control" id="age" required>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label>Date of Birth</label>
+        <input type="date" class="form-control" id="dob" required>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label>Sex</label>
+        <select class="form-control" id="sex">
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label>Civil Status</label>
+        <select class="form-control" id="civilStatus">
+          <option>Single</option>
+          <option>Married</option>
+          <option>Widowed</option>
+          <option>Separated</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label>Address</label>
+        <input type="text" class="form-control" id="address" required>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label>Contact No.</label>
+        <input type="text" class="form-control" id="contact" required>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label>Emergency Contact</label>
+        <input type="text" class="form-control" id="emergency">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label>Blood Type</label>
+        <input type="text" class="form-control" id="blood">
+      </div>
+      
+      <div class="col-md-4 mb-3">
+        <label>Allergies</label>
+        <input type="text" class="form-control" id="allergies">
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label>Hobbies</label>
+      <input type="text" class="form-control" id="hobbies">
+    </div>
+
+    <div class="mb-3">
+      <label>Skills</label>
+      <input type="text" class="form-control" id="skills">
+    </div>
+
+    <!-- Educational Background -->
+    <div class="section-title">Educational Background</div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label>Elementary School</label>
+        <input type="text" class="form-control" id="elem">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>High School</label>
+        <input type="text" class="form-control" id="highschool">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>College</label>
+        <input type="text" class="form-control" id="college">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>Others</label>
+        <input type="text" class="form-control" id="others">
+      </div>
+    </div>
+
+    <!-- Work Experience -->
+    <div class="section-title">Work Experience</div>
+    <div class="mb-3">
+      <label>List Work Experience (Job Title, Company, Year)</label>
+      <textarea class="form-control" id="workExperience" rows="3"></textarea>
+    </div>
+
+    <!-- Character References -->
+    <div class="section-title">Character References</div>
+    <div class="mb-3">
+      <label>Name, Contact Number, Relationship</label>
+      <textarea class="form-control" id="references" rows="3"></textarea>
+    </div>
+
+    <!-- Signature -->
+    <div class="section-title">Signature</div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label>Signature</label>
+        <input type="text" class="form-control" id="signature" placeholder="Type full name as signature" />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>Date</label>
+        <input type="date" class="form-control" id="signDate" />
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Submit Biodata</button>
+  </form>
+
+  <!-- Biodata Display Section -->
+  <div id="biodataDisplay" class="d-none">
+    <h2 class="text-center mb-4">Filled Biodata</h2>
+    <div id="filledBiodata" class="biodata-display">
+      <div class="biodata-card">
+        <div class="biodata-photo">
+          <img id="displayPhoto" src="" alt="Photo" />
+        </div>
+        <h4>Personal Information</h4>
+        <p><strong>Name:</strong> <span id="displayName"></span></p>
+        <p><strong>Age:</strong> <span id="displayAge"></span> | <strong>Sex:</strong> <span id="displaySex"></span> | <strong>Status:</strong> <span id="displayStatus"></span></p>
+        <p><strong>Date of Birth:</strong> <span id="displayDob"></span></p>
+        <p><strong>Address:</strong> <span id="displayAddress"></span></p>
+        <p><strong>Contact:</strong> <span id="displayContact"></span> | <strong>Emergency:</strong> <span id="displayEmergency"></span></p>
+        <p><strong>Blood Type:</strong> <span id="displayBlood"></span> | <strong>Genotype:</strong> <span id="displayGenotype"></span></p>
+        <p><strong>Allergies:</strong> <span id="displayAllergies"></span></p>
+        <p><strong>Hobbies:</strong> <span id="displayHobbies"></span></p>
+        <p><strong>Skills:</strong> <span id="displaySkills"></span></p>
+
+        <h4>Educational Background</h4>
+        <p><strong>Elementary:</strong> <span id="displayElem"></span></p>
+        <p><strong>High School:</strong> <span id="displayHighschool"></span></p>
+        <p><strong>College:</strong> <span id="displayCollege"></span></p>
+        <p><strong>Others:</strong> <span id="displayOthers"></span></p>
+
+        <h4>Work Experience</h4>
+        <p><span id="displayWorkExperience"></span></p>
+
+        <h4>Character References</h4>
+        <p><span id="displayReferences"></span></p>
+
+        <h4>Signature</h4>
+        <p><strong>Signed by:</strong> <span id="displaySignature"></span> on <span id="displaySignDate"></span></p>
+      </div>
+    </div>
+    <button id="backBtn" class="btn btn-secondary w-100 mt-4">Back to Form</button>
+  </div>
+</div>
+
+<script>
+  let photoBase64 = "";
+
+  document.getElementById("photo").addEventListener("change", function () {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      photoBase64 = e.target.result;
+      document.getElementById("displayPhoto").src = photoBase64;
+    };
+    if (this.files[0]) reader.readAsDataURL(this.files[0]);
+  });
+
+  document.getElementById("biodataForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const getVal = id => document.getElementById(id).value;
+
+    const biodata = {
+      name: `${getVal("lastName")}, ${getVal("firstName")} ${getVal("middleName")}`,
+      age: getVal("age"),
+      dob: getVal("dob"),
+      sex: getVal("sex"),
+      status: getVal("civilStatus"),
+      address: getVal("address"),
+      contact: getVal("contact"),
+      emergency: getVal("emergency"),
+      blood: getVal("blood"),
+      genotype: getVal("genotype"),
+      allergies: getVal("allergies"),
+      hobbies: getVal("hobbies"),
+      skills: getVal("skills"),
+      elem: getVal("elem"),
+      highschool: getVal("highschool"),
+      college: getVal("college"),
+      others: getVal("others"),
+      workExperience: getVal("workExperience"),
+      references: getVal("references"),
+      signature: getVal("signature"),
+      signDate: getVal("signDate"),
+      photo: photoBase64
+    };
+
+    // Hide form and show filled biodata
+    document.getElementById("biodataForm").classList.add("d-none");
+    document.getElementById("biodataDisplay").classList.remove("d-none");
+
+    // Display filled biodata in a more formatted way
+    document.getElementById("displayName").textContent = biodata.name;
+    document.getElementById("displayAge").textContent = biodata.age;
+    document.getElementById("displaySex").textContent = biodata.sex;
+    document.getElementById("displayStatus").textContent = biodata.status;
+    document.getElementById("displayDob").textContent = biodata.dob;
+    document.getElementById("displayAddress").textContent = biodata.address;
+    document.getElementById("displayContact").textContent = biodata.contact;
+    document.getElementById("displayEmergency").textContent = biodata.emergency;
+    document.getElementById("displayBlood").textContent = biodata.blood;
+    document.getElementById("displayGenotype").textContent = biodata.genotype;
+    document.getElementById("displayAllergies").textContent = biodata.allergies;
+    document.getElementById("displayHobbies").textContent = biodata.hobbies;
+    document.getElementById("displaySkills").textContent = biodata.skills;
+    document.getElementById("displayElem").textContent = biodata.elem;
+    document.getElementById("displayHighschool").textContent = biodata.highschool;
+    document.getElementById("displayCollege").textContent = biodata.college;
+    document.getElementById("displayOthers").textContent = biodata.others;
+    document.getElementById("displayWorkExperience").textContent = biodata.workExperience;
+    document.getElementById("displayReferences").textContent = biodata.references;
+    document.getElementById("displaySignature").textContent = biodata.signature;
+    document.getElementById("displaySignDate").textContent = biodata.signDate;
+  });
+
+  document.getElementById("backBtn").addEventListener("click", function () {
+    document.getElementById("biodataForm").classList.remove("d-none");
+    document.getElementById("biodataDisplay").classList.add("d-none");
+  });
+</script>
+</body>
+</html>
