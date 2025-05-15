@@ -1,301 +1,629 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Philippine Biodata Form</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Biodata Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    .section-title {
-      background: #f0f0f0;
-      padding: 6px;
-      margin-top: 20px;
-      font-weight: bold;
-      border: 1px solid #ccc;
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --light-gray: #f8f9fa;
+      --medium-gray: #e9ecef;
+      --dark-gray: #495057;
+      --text-color: #333;
     }
-    .biodata-card {
-      padding: 20px;
-      border: 2px solid #ddd;
+    
+    body {
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--light-gray);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    
+    .form-container {
+      background-color: white;
       border-radius: 8px;
-      margin-bottom: 20px;
-      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(0, 0, 0, 0.05);
     }
-    .biodata-card h4 {
-      margin-bottom: 10px;
-    }
-    .biodata-card p {
-      margin: 5px 0;
-    }
-    .biodata-display {
-      padding: 20px;
-      background: #fafafa;
-      border: 2px solid #ccc;
-      border-radius: 8px;
-    }
-    .biodata-photo img {
-      max-width: 120px;
-      margin-bottom: 20px;
-    }
-    .biodata-photo {
+    
+    .header {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--medium-gray);
+    }
+    
+    .header h2 {
+      color: var(--primary-color);
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .header p {
+      color: var(--dark-gray);
+      font-size: 1rem;
+    }
+    
+    .section-title {
+      color: var(--primary-color);
+      font-weight: 500;
+      font-size: 1.1rem;
+      margin: 2rem 0 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--medium-gray);
+      display: flex;
+      align-items: center;
+    }
+    
+    .section-title i {
+      margin-right: 0.75rem;
+      color: var(--secondary-color);
+    }
+    
+    .required-field::after {
+      content: " *";
+      color: #e74c3c;
+    }
+    
+    .form-control, .form-select {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 0.75rem;
+      font-size: 0.95rem;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.1);
+    }
+    
+    .photo-upload-container {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid var(--medium-gray);
+      background-color: white;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .photo-upload-container:hover {
+      border-color: var(--secondary-color);
+    }
+    
+    .photo-upload-container input[type="file"] {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+    
+    .photo-upload-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      color: var(--dark-gray);
+    }
+    
+    .photo-preview {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    #resultContainer {
+      display: none;
+      margin-top: 2rem;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .result-section {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+    }
+    
+    .result-section h5 {
+      color: var(--primary-color);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .result-section h5 i {
+      margin-right: 0.75rem;
+      color: var(--secondary-color);
+    }
+    
+    .result-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1rem;
+      display: block;
+      border: 1px solid var(--medium-gray);
+    }
+    
+    .btn-primary {
+      background-color: var(--secondary-color);
+      border-color: var(--secondary-color);
+      padding: 0.5rem 1.5rem;
+      font-weight: 500;
+    }
+    
+    .btn-secondary {
+      background-color: white;
+      border-color: var(--medium-gray);
+      color: var(--dark-gray);
+      padding: 0.5rem 1.5rem;
+    }
+    
+    .card {
+      border: 1px solid var(--medium-gray);
+      box-shadow: none;
+    }
+    
+    .card-header {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 500;
+    }
+    
+    .list-group-item {
+      border-left: none;
+      border-right: none;
+      padding: 0.75rem 1.25rem;
+    }
+    
+    .list-group-item:first-child {
+      border-top: none;
+    }
+    
+    small.text-muted {
+      color: var(--dark-gray) !important;
+    }
+    
+    @media (max-width: 768px) {
+      .form-container {
+        padding: 1.5rem;
+      }
+      
+      .header {
+        margin-bottom: 1.5rem;
+      }
     }
   </style>
 </head>
-<body class="bg-light">
+<body>
 <div class="container my-5">
-  <h2 class="text-center mb-4">Biodata</h2>
-  <form id="biodataForm" class="p-4 bg-white border rounded shadow-sm">
-    <!-- PHOTO -->
-    <div class="mb-3 text-center">
-      <label for="photo" class="form-label">Upload 2x2 Photo</label>
-      <input type="file" class="form-control" id="photo" accept="image/*" />
+  <div class="form-container">
+    <div class="header">
+      <h2> Biodata Form</h2>
+      <p>Complete your professional profile information</p>
     </div>
 
-    <!-- Personal Info -->
-    <div class="section-title">Personal Information</div>
-    <div class="row">
-      <div class="col-md-4 mb-3">
-        <label>Last Name</label>
-        <input type="text" class="form-control" id="lastName" required>
-      </div>
-      <div class="col-md-4 mb-3">
-        <label>First Name</label>
-        <input type="text" class="form-control" id="firstName" required>
-      </div>
-      <div class="col-md-4 mb-3">
-        <label>Middle Name</label>
-        <input type="text" class="form-control" id="middleName">
-      </div>
-    </div>
+    <form id="biodataForm" onsubmit="showResults(event)">
+      <div class="row">
+        <div class="col-lg-9">
+          <!-- Personal Information -->
+          <div class="section-title">
+            <i class="fas fa-user"></i> Personal Information
+          </div>
+          
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="lastName" class="form-label required-field">Last Name</label>
+              <input type="text" class="form-control" id="lastName" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="firstName" class="form-label required-field">First Name</label>
+              <input type="text" class="form-control" id="firstName" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="middleName" class="form-label">Middle Name</label>
+              <input type="text" class="form-control" id="middleName">
+            </div>
+          </div>
 
-    <div class="row">
-      <div class="col-md-3 mb-3">
-        <label>Age</label>
-        <input type="number" class="form-control" id="age" required>
-      </div>
-      <div class="col-md-3 mb-3">
-        <label>Date of Birth</label>
-        <input type="date" class="form-control" id="dob" required>
-      </div>
-      <div class="col-md-3 mb-3">
-        <label>Sex</label>
-        <select class="form-control" id="sex">
-          <option>Male</option>
-          <option>Female</option>
-        </select>
-      </div>
-      <div class="col-md-3 mb-3">
-        <label>Civil Status</label>
-        <select class="form-control" id="civilStatus">
-          <option>Single</option>
-          <option>Married</option>
-          <option>Widowed</option>
-          <option>Separated</option>
-        </select>
-      </div>
-    </div>
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <label for="age" class="form-label required-field">Age</label>
+              <input type="number" class="form-control" id="age" min="18" max="100" required>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="dob" class="form-label required-field">Date of Birth</label>
+              <input type="date" class="form-control" id="dob" required>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="sex" class="form-label required-field">Gender</label>
+              <select class="form-select" id="sex" required>
+                <option value="">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="civilStatus" class="form-label required-field">Civil Status</label>
+              <select class="form-select" id="civilStatus" required>
+                <option value="">Select</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Widowed">Widowed</option>
+                <option value="Separated">Separated</option>
+                <option value="Divorced">Divorced</option>
+              </select>
+            </div>
+          </div>
 
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label>Address</label>
-        <input type="text" class="form-control" id="address" required>
-      </div>
-      <div class="col-md-3 mb-3">
-        <label>Contact No.</label>
-        <input type="text" class="form-control" id="contact" required>
-      </div>
-      <div class="col-md-3 mb-3">
-        <label>Emergency Contact</label>
-        <input type="text" class="form-control" id="emergency">
-      </div>
-    </div>
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="nationality" class="form-label">Nationality</label>
+              <input type="text" class="form-control" id="nationality" value="Filipino">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="religion" class="form-label">Religion</label>
+              <input type="text" class="form-control" id="religion">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="language" class="form-label">Languages</label>
+              <input type="text" class="form-control" id="language" placeholder="English, Filipino">
+            </div>
+          </div>
 
-    <div class="row">
-      <div class="col-md-4 mb-3">
-        <label>Blood Type</label>
-        <input type="text" class="form-control" id="blood">
-      </div>
-      
-      <div class="col-md-4 mb-3">
-        <label>Allergies</label>
-        <input type="text" class="form-control" id="allergies">
-      </div>
-    </div>
+          <!-- Contact Information -->
+          <div class="section-title">
+            <i class="fas fa-address-book"></i> Contact Information
+          </div>
+          
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label for="address" class="form-label required-field">Current Address</label>
+              <input type="text" class="form-control" id="address" required>
+            </div>
+          </div>
 
-    <div class="mb-3">
-      <label>Hobbies</label>
-      <input type="text" class="form-control" id="hobbies">
-    </div>
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="email">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="contact" class="form-label required-field">Contact No.</label>
+              <input type="tel" class="form-control" id="contact" required>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="emergency" class="form-label">Emergency Contact</label>
+              <input type="tel" class="form-control" id="emergency">
+            </div>
+          </div>
 
-    <div class="mb-3">
-      <label>Skills</label>
-      <input type="text" class="form-control" id="skills">
-    </div>
+          <!-- Educational Background -->
+          <div class="section-title">
+            <i class="fas fa-graduation-cap"></i> Education
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="elem" class="form-label">Elementary School</label>
+              <input type="text" class="form-control" id="elem">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="elemYear" class="form-label">Year Graduated</label>
+              <input type="number" class="form-control" id="elemYear" min="1950" max="2024">
+            </div>
+          </div>
 
-    <!-- Educational Background -->
-    <div class="section-title">Educational Background</div>
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label>Elementary School</label>
-        <input type="text" class="form-control" id="elem">
-      </div>
-      <div class="col-md-6 mb-3">
-        <label>High School</label>
-        <input type="text" class="form-control" id="highschool">
-      </div>
-      <div class="col-md-6 mb-3">
-        <label>College</label>
-        <input type="text" class="form-control" id="college">
-      </div>
-      <div class="col-md-6 mb-3">
-        <label>Others</label>
-        <input type="text" class="form-control" id="others">
-      </div>
-    </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="highschool" class="form-label">High School</label>
+              <input type="text" class="form-control" id="highschool">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="hsYear" class="form-label">Year Graduated</label>
+              <input type="number" class="form-control" id="hsYear" min="1950" max="2024">
+            </div>
+          </div>
 
-    <!-- Work Experience -->
-    <div class="section-title">Work Experience</div>
-    <div class="mb-3">
-      <label>List Work Experience (Job Title, Company, Year)</label>
-      <textarea class="form-control" id="workExperience" rows="3"></textarea>
-    </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="college" class="form-label">College/University</label>
+              <input type="text" class="form-control" id="college">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="collegeYear" class="form-label">Year Graduated</label>
+              <input type="number" class="form-control" id="collegeYear" min="1950" max="2024">
+            </div>
+          </div>
 
-    <!-- Character References -->
-    <div class="section-title">Character References</div>
-    <div class="mb-3">
-      <label>Name, Contact Number, Relationship</label>
-      <textarea class="form-control" id="references" rows="3"></textarea>
-    </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="course" class="form-label">Degree/Course</label>
+              <input type="text" class="form-control" id="course">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="honors" class="form-label">Honors/Awards</label>
+              <input type="text" class="form-control" id="honors">
+            </div>
+          </div>
 
-    <!-- Signature -->
-    <div class="section-title">Signature</div>
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label>Signature</label>
-        <input type="text" class="form-control" id="signature" placeholder="Type full name as signature" />
-      </div>
-      <div class="col-md-6 mb-3">
-        <label>Date</label>
-        <input type="date" class="form-control" id="signDate" />
-      </div>
-    </div>
-
-    <button type="submit" class="btn btn-primary w-100">Submit Biodata</button>
-  </form>
-
-  <!-- Biodata Display Section -->
-  <div id="biodataDisplay" class="d-none">
-    <h2 class="text-center mb-4">Filled Biodata</h2>
-    <div id="filledBiodata" class="biodata-display">
-      <div class="biodata-card">
-        <div class="biodata-photo">
-          <img id="displayPhoto" src="" alt="Photo" />
+          <!-- Work Experience -->
+          <div class="section-title">
+            <i class="fas fa-briefcase"></i> Work Experience
+          </div>
+          
+          <div id="workExperienceContainer">
+            <div class="work-experience-entry mb-3 p-3 border rounded">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="jobTitle1" class="form-label">Job Title</label>
+                  <input type="text" class="form-control" id="jobTitle1">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="company1" class="form-label">Company</label>
+                  <input type="text" class="form-control" id="company1">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="workStart1" class="form-label">Start Date</label>
+                  <input type="date" class="form-control" id="workStart1">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="workEnd1" class="form-label">End Date</label>
+                  <input type="date" class="form-control" id="workEnd1">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 mb-3">
+                  <label for="jobDesc1" class="form-label">Job Description</label>
+                  <textarea class="form-control" id="jobDesc1" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Declaration -->
+          <div class="section-title">
+            <i class="fas fa-file-signature"></i> Declaration
+          </div>
+          
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="declaration" required>
+            <label class="form-check-label" for="declaration">
+              I hereby declare that the information provided is true and correct.
+            </label>
+          </div>
+          
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+            <button type="reset" class="btn btn-secondary me-md-2">
+              <i class="fas fa-undo"></i> Reset
+            </button>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save"></i> Submit
+            </button>
+          </div>
         </div>
-        <h4>Personal Information</h4>
-        <p><strong>Name:</strong> <span id="displayName"></span></p>
-        <p><strong>Age:</strong> <span id="displayAge"></span> | <strong>Sex:</strong> <span id="displaySex"></span> | <strong>Status:</strong> <span id="displayStatus"></span></p>
-        <p><strong>Date of Birth:</strong> <span id="displayDob"></span></p>
-        <p><strong>Address:</strong> <span id="displayAddress"></span></p>
-        <p><strong>Contact:</strong> <span id="displayContact"></span> | <strong>Emergency:</strong> <span id="displayEmergency"></span></p>
-        <p><strong>Blood Type:</strong> <span id="displayBlood"></span> | <strong>Genotype:</strong> <span id="displayGenotype"></span></p>
-        <p><strong>Allergies:</strong> <span id="displayAllergies"></span></p>
-        <p><strong>Hobbies:</strong> <span id="displayHobbies"></span></p>
-        <p><strong>Skills:</strong> <span id="displaySkills"></span></p>
+        
+        <!-- Photo Upload Section -->
+        <div class="col-lg-3">
+          <div class="photo-upload-container">
+            <input type="file" id="photoUpload" accept="image/*">
+            <div class="photo-upload-icon">
+              <i class="fas fa-camera"></i>
+            </div>
+            <img id="photoPreview" class="photo-preview" style="display: none;">
+          </div>
+          <div class="text-center mb-4">
+          </div>
+          
+          <div class="card mb-4">
+            <div class="card-header">
+              <i class="fas fa-lightbulb"></i> Tips
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Complete all required fields</li>
+                <li class="list-group-item">Provide accurate information</li>
+                <li class="list-group-item">Use your legal name</li>
+                <li class="list-group-item">Include relevant experience</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
 
-        <h4>Educational Background</h4>
-        <p><strong>Elementary:</strong> <span id="displayElem"></span></p>
-        <p><strong>High School:</strong> <span id="displayHighschool"></span></p>
-        <p><strong>College:</strong> <span id="displayCollege"></span></p>
-        <p><strong>Others:</strong> <span id="displayOthers"></span></p>
-
-        <h4>Work Experience</h4>
-        <p><span id="displayWorkExperience"></span></p>
-
-        <h4>Character References</h4>
-        <p><span id="displayReferences"></span></p>
-
-        <h4>Signature</h4>
-        <p><strong>Signed by:</strong> <span id="displaySignature"></span> on <span id="displaySignDate"></span></p>
+    <!-- Results Section -->
+    <div id="resultContainer" class="form-container">
+      <h3 class="text-center mb-4">Biodata Summary</h3>
+      
+      <div class="row">
+        <div class="col-md-3 text-center">
+          <img id="resultPhoto" src="" alt="Photo" class="result-photo">
+        </div>
+        <div class="col-md-9">
+          <h3 id="resultFullName" class="mb-3"></h3>
+          
+          <div class="result-section">
+            <h5><i class="fas fa-user me-2"></i>Personal Information</h5>
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>Age:</strong> <span id="resultAge"></span></p>
+                <p><strong>Date of Birth:</strong> <span id="resultDob"></span></p>
+                <p><strong>Gender:</strong> <span id="resultSex"></span></p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Civil Status:</strong> <span id="resultCivilStatus"></span></p>
+                <p><strong>Nationality:</strong> <span id="resultNationality"></span></p>
+                <p><strong>Religion:</strong> <span id="resultReligion"></span></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="result-section">
+            <h5><i class="fas fa-address-book me-2"></i>Contact Information</h5>
+            <p><strong>Address:</strong> <span id="resultAddress"></span></p>
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>Email:</strong> <span id="resultEmail"></span></p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Contact No.:</strong> <span id="resultContact"></span></p>
+              </div>
+            </div>
+            <p><strong>Emergency Contact:</strong> <span id="resultEmergency"></span></p>
+          </div>
+          
+          <div class="result-section">
+            <h5><i class="fas fa-graduation-cap me-2"></i>Education</h5>
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>Elementary:</strong> <span id="resultElem"></span> (<span id="resultElemYear"></span>)</p>
+                <p><strong>High School:</strong> <span id="resultHighschool"></span> (<span id="resultHsYear"></span>)</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>College:</strong> <span id="resultCollege"></span> (<span id="resultCollegeYear"></span>)</p>
+                <p><strong>Degree:</strong> <span id="resultCourse"></span></p>
+              </div>
+            </div>
+            <p><strong>Honors/Awards:</strong> <span id="resultHonors"></span></p>
+          </div>
+          
+          <div class="result-section">
+            <h5><i class="fas fa-briefcase me-2"></i>Work Experience</h5>
+            <div id="resultWorkExperience"></div>
+          </div>
+        </div>
       </div>
     </div>
-    <button id="backBtn" class="btn btn-secondary w-100 mt-4">Back to Form</button>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  let photoBase64 = "";
-
-  document.getElementById("photo").addEventListener("change", function () {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      photoBase64 = e.target.result;
-      document.getElementById("displayPhoto").src = photoBase64;
-    };
-    if (this.files[0]) reader.readAsDataURL(this.files[0]);
+  // Simple photo preview functionality
+  document.getElementById('photoUpload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const photoPreview = document.getElementById('photoPreview');
+    const photoUploadIcon = document.querySelector('.photo-upload-icon');
+    
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        photoPreview.src = event.target.result;
+        photoPreview.style.display = 'block';
+        photoUploadIcon.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+  
+  // Simple age calculation from date of birth
+  document.getElementById('dob').addEventListener('change', function() {
+    const dob = new Date(this.value);
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const monthDiff = today.getMonth() - dob.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+      age--;
+    }
+    
+    document.getElementById('age').value = age;
   });
 
-  document.getElementById("biodataForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const getVal = id => document.getElementById(id).value;
-
-    const biodata = {
-      name: `${getVal("lastName")}, ${getVal("firstName")} ${getVal("middleName")}`,
-      age: getVal("age"),
-      dob: getVal("dob"),
-      sex: getVal("sex"),
-      status: getVal("civilStatus"),
-      address: getVal("address"),
-      contact: getVal("contact"),
-      emergency: getVal("emergency"),
-      blood: getVal("blood"),
-      genotype: getVal("genotype"),
-      allergies: getVal("allergies"),
-      hobbies: getVal("hobbies"),
-      skills: getVal("skills"),
-      elem: getVal("elem"),
-      highschool: getVal("highschool"),
-      college: getVal("college"),
-      others: getVal("others"),
-      workExperience: getVal("workExperience"),
-      references: getVal("references"),
-      signature: getVal("signature"),
-      signDate: getVal("signDate"),
-      photo: photoBase64
-    };
-
-    // Hide form and show filled biodata
-    document.getElementById("biodataForm").classList.add("d-none");
-    document.getElementById("biodataDisplay").classList.remove("d-none");
-
-    // Display filled biodata in a more formatted way
-    document.getElementById("displayName").textContent = biodata.name;
-    document.getElementById("displayAge").textContent = biodata.age;
-    document.getElementById("displaySex").textContent = biodata.sex;
-    document.getElementById("displayStatus").textContent = biodata.status;
-    document.getElementById("displayDob").textContent = biodata.dob;
-    document.getElementById("displayAddress").textContent = biodata.address;
-    document.getElementById("displayContact").textContent = biodata.contact;
-    document.getElementById("displayEmergency").textContent = biodata.emergency;
-    document.getElementById("displayBlood").textContent = biodata.blood;
-    document.getElementById("displayGenotype").textContent = biodata.genotype;
-    document.getElementById("displayAllergies").textContent = biodata.allergies;
-    document.getElementById("displayHobbies").textContent = biodata.hobbies;
-    document.getElementById("displaySkills").textContent = biodata.skills;
-    document.getElementById("displayElem").textContent = biodata.elem;
-    document.getElementById("displayHighschool").textContent = biodata.highschool;
-    document.getElementById("displayCollege").textContent = biodata.college;
-    document.getElementById("displayOthers").textContent = biodata.others;
-    document.getElementById("displayWorkExperience").textContent = biodata.workExperience;
-    document.getElementById("displayReferences").textContent = biodata.references;
-    document.getElementById("displaySignature").textContent = biodata.signature;
-    document.getElementById("displaySignDate").textContent = biodata.signDate;
-  });
-
-  document.getElementById("backBtn").addEventListener("click", function () {
-    document.getElementById("biodataForm").classList.remove("d-none");
-    document.getElementById("biodataDisplay").classList.add("d-none");
-  });
+  // Show results function
+  function showResults(event) {
+    event.preventDefault();
+    
+    // Format date for display
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+    
+    // Set the photo in the results
+    const photoSrc = document.getElementById('photoPreview').src;
+    if (photoSrc) {
+      document.getElementById('resultPhoto').src = photoSrc;
+    } else {
+      document.getElementById('resultPhoto').style.display = 'none';
+    }
+    
+    // Populate the results with form data
+    document.getElementById('resultFullName').textContent = 
+      document.getElementById('firstName').value + ' ' + 
+      (document.getElementById('middleName').value ? document.getElementById('middleName').value + ' ' : '') + 
+      document.getElementById('lastName').value;
+    
+    document.getElementById('resultAge').textContent = document.getElementById('age').value;
+    document.getElementById('resultDob').textContent = formatDate(document.getElementById('dob').value);
+    document.getElementById('resultSex').textContent = document.getElementById('sex').value;
+    document.getElementById('resultCivilStatus').textContent = document.getElementById('civilStatus').value;
+    document.getElementById('resultNationality').textContent = document.getElementById('nationality').value;
+    document.getElementById('resultReligion').textContent = document.getElementById('religion').value;
+    
+    document.getElementById('resultAddress').textContent = document.getElementById('address').value;
+    document.getElementById('resultEmail').textContent = document.getElementById('email').value;
+    document.getElementById('resultContact').textContent = document.getElementById('contact').value;
+    document.getElementById('resultEmergency').textContent = document.getElementById('emergency').value;
+    
+    document.getElementById('resultElem').textContent = document.getElementById('elem').value;
+    document.getElementById('resultElemYear').textContent = document.getElementById('elemYear').value;
+    document.getElementById('resultHighschool').textContent = document.getElementById('highschool').value;
+    document.getElementById('resultHsYear').textContent = document.getElementById('hsYear').value;
+    document.getElementById('resultCollege').textContent = document.getElementById('college').value;
+    document.getElementById('resultCollegeYear').textContent = document.getElementById('collegeYear').value;
+    document.getElementById('resultCourse').textContent = document.getElementById('course').value;
+    document.getElementById('resultHonors').textContent = document.getElementById('honors').value;
+    
+    // Populate work experience
+    const workExpContainer = document.getElementById('resultWorkExperience');
+    workExpContainer.innerHTML = '';
+    
+    const jobTitle = document.getElementById('jobTitle1').value;
+    const company = document.getElementById('company1').value;
+    const workStart = document.getElementById('workStart1').value;
+    const workEnd = document.getElementById('workEnd1').value;
+    const jobDesc = document.getElementById('jobDesc1').value;
+    
+    if (jobTitle || company) {
+      const workExpHTML = `
+        <div class="mb-3 p-3 border rounded">
+          <p><strong>Job Title:</strong> ${jobTitle}</p>
+          <p><strong>Company:</strong> ${company}</p>
+          <p><strong>Duration:</strong> ${formatDate(workStart)} to ${formatDate(workEnd)}</p>
+          <p><strong>Description:</strong> ${jobDesc}</p>
+        </div>
+      `;
+      workExpContainer.innerHTML = workExpHTML;
+    }
+    
+    // Show the results container
+    document.getElementById('resultContainer').style.display = 'block';
+    
+    // Scroll to results
+    document.getElementById('resultContainer').scrollIntoView({ behavior: 'smooth' });
+  }
 </script>
 </body>
 </html>
