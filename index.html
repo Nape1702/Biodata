@@ -1,233 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Professional Biodata Form</title>
+  
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS styles -->
   <style>
+    /* CSS variables for color scheme */
     :root {
       --primary-color: #2c3e50;
       --secondary-color: #3498db;
+      --accent-color: #e74c3c;
       --light-gray: #f8f9fa;
       --medium-gray: #e9ecef;
       --dark-gray: #495057;
       --text-color: #333;
+      --success-color: #2ecc71;
     }
     
+    /* Base body styling */
     body {
       font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
       background-color: var(--light-gray);
       color: var(--text-color);
       line-height: 1.6;
+      padding-top: 30px;
+      padding-bottom: 50px;
     }
     
+    /* Main form container styling */
     .form-container {
       background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      padding: 2rem;
-      margin-bottom: 2rem;
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      padding: 3rem;
+      margin-bottom: 3rem;
+      border: none;
+      transition: all 0.3s ease;
     }
     
+    /* Hover effect for form container */
+    .form-container:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Header section styling */
     .header {
       text-align: center;
-      margin-bottom: 2rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--medium-gray);
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid var(--medium-gray);
     }
     
-    .header h2 {
-      color: var(--primary-color);
-      font-weight: 600;
-      letter-spacing: -0.5px;
-      margin-bottom: 0.5rem;
-    }
-    
-    .header p {
-      color: var(--dark-gray);
-      font-size: 1rem;
-    }
-    
+    /* Section title styling */
     .section-title {
       color: var(--primary-color);
-      font-weight: 500;
-      font-size: 1.1rem;
-      margin: 2rem 0 1.25rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--medium-gray);
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin: 3rem 0 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--medium-gray);
       display: flex;
       align-items: center;
     }
     
-    .section-title i {
-      margin-right: 0.75rem;
-      color: var(--secondary-color);
-    }
-    
+    /* Required field indicator */
     .required-field::after {
       content: " *";
-      color: #e74c3c;
+      color: var(--accent-color);
+      font-weight: bold;
     }
     
+    /* Form input styling */
     .form-control, .form-select {
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      padding: 0.75rem;
-      font-size: 0.95rem;
+      border: 2px solid #ced4da;
+      border-radius: 8px;
+      padding: 0.85rem;
+      font-size: 1rem;
+      transition: all 0.2s ease;
     }
     
-    .form-control:focus, .form-select:focus {
-      border-color: var(--secondary-color);
-      box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.1);
-    }
-    
+    /* Photo upload container styling */
     .photo-upload-container {
-      width: 150px;
-      height: 150px;
-      margin: 0 auto 1.5rem;
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 2rem;
       border-radius: 50%;
       overflow: hidden;
-      border: 1px solid var(--medium-gray);
+      border: 2px dashed var(--medium-gray);
       background-color: white;
       cursor: pointer;
       position: relative;
       transition: all 0.3s ease;
     }
     
-    .photo-upload-container:hover {
-      border-color: var(--secondary-color);
-    }
-    
-    .photo-upload-container input[type="file"] {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      cursor: pointer;
-    }
-    
-    .photo-upload-icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2rem;
-      color: var(--dark-gray);
-    }
-    
-    .photo-preview {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    
+    /* Results container styling */
     #resultContainer {
       display: none;
-      margin-top: 2rem;
-      padding: 2rem;
+      margin-top: 3rem;
+      padding: 3rem;
       background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      border: none;
+      animation: fadeIn 0.5s ease;
     }
     
-    .result-section {
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
+    /* Animation for results display */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
-    .result-section h5 {
-      color: var(--primary-color);
-      font-weight: 500;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-    }
-    
-    .result-section h5 i {
-      margin-right: 0.75rem;
-      color: var(--secondary-color);
-    }
-    
-    .result-photo {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 0 auto 1rem;
-      display: block;
-      border: 1px solid var(--medium-gray);
-    }
-    
+    /* Button styling */
     .btn-primary {
       background-color: var(--secondary-color);
       border-color: var(--secondary-color);
-      padding: 0.5rem 1.5rem;
-      font-weight: 500;
+      padding: 0.75rem 2rem;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: all 0.2s ease;
     }
     
-    .btn-secondary {
-      background-color: white;
-      border-color: var(--medium-gray);
-      color: var(--dark-gray);
-      padding: 0.5rem 1.5rem;
-    }
-    
-    .card {
-      border: 1px solid var(--medium-gray);
-      box-shadow: none;
-    }
-    
-    .card-header {
-      background-color: var(--primary-color);
-      color: white;
-      font-weight: 500;
-    }
-    
-    .list-group-item {
-      border-left: none;
-      border-right: none;
-      padding: 0.75rem 1.25rem;
-    }
-    
-    .list-group-item:first-child {
-      border-top: none;
-    }
-    
-    small.text-muted {
-      color: var(--dark-gray) !important;
-    }
-    
+    /* Mobile responsive adjustments */
     @media (max-width: 768px) {
       .form-container {
-        padding: 1.5rem;
+        padding: 2rem;
       }
       
       .header {
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
+      }
+      
+      .header h2 {
+        font-size: 2rem;
+      }
+      
+      .photo-upload-container {
+        width: 150px;
+        height: 150px;
       }
     }
   </style>
 </head>
 <body>
+<!-- Main container -->
 <div class="container my-5">
   <div class="form-container">
+    <!-- Form header -->
     <div class="header">
-      <h2> Biodata Form</h2>
+      <h2>Professional Biodata Form</h2>
       <p>Complete your professional profile information</p>
     </div>
 
+    <!-- Main form -->
     <form id="biodataForm" onsubmit="showResults(event)">
       <div class="row">
+        <!-- Left column - Form fields -->
         <div class="col-lg-9">
-          <!-- Personal Information -->
+          <!-- Personal Information section -->
           <div class="section-title">
             <i class="fas fa-user"></i> Personal Information
           </div>
           
+          <!-- Name fields -->
           <div class="row">
             <div class="col-md-4 mb-3">
               <label for="lastName" class="form-label required-field">Last Name</label>
@@ -243,6 +186,7 @@
             </div>
           </div>
 
+          <!-- Personal details -->
           <div class="row">
             <div class="col-md-3 mb-3">
               <label for="age" class="form-label required-field">Age</label>
@@ -273,6 +217,7 @@
             </div>
           </div>
 
+          <!-- Additional personal info -->
           <div class="row">
             <div class="col-md-4 mb-3">
               <label for="nationality" class="form-label">Nationality</label>
@@ -288,11 +233,12 @@
             </div>
           </div>
 
-          <!-- Contact Information -->
+          <!-- Contact Information section -->
           <div class="section-title">
             <i class="fas fa-address-book"></i> Contact Information
           </div>
           
+          <!-- Address field -->
           <div class="row">
             <div class="col-md-12 mb-3">
               <label for="address" class="form-label required-field">Current Address</label>
@@ -300,6 +246,7 @@
             </div>
           </div>
 
+          <!-- Contact details -->
           <div class="row">
             <div class="col-md-4 mb-3">
               <label for="email" class="form-label">Email Address</label>
@@ -315,11 +262,12 @@
             </div>
           </div>
 
-          <!-- Educational Background -->
+          <!-- Education section -->
           <div class="section-title">
             <i class="fas fa-graduation-cap"></i> Education
           </div>
           
+          <!-- Elementary school -->
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="elem" class="form-label">Elementary School</label>
@@ -331,6 +279,7 @@
             </div>
           </div>
 
+          <!-- High school -->
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="highschool" class="form-label">High School</label>
@@ -342,6 +291,7 @@
             </div>
           </div>
 
+          <!-- College -->
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="college" class="form-label">College/University</label>
@@ -353,6 +303,7 @@
             </div>
           </div>
 
+          <!-- Degree and honors -->
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="course" class="form-label">Degree/Course</label>
@@ -364,11 +315,12 @@
             </div>
           </div>
 
-          <!-- Work Experience -->
+          <!-- Work Experience section -->
           <div class="section-title">
             <i class="fas fa-briefcase"></i> Work Experience
           </div>
           
+          <!-- Work experience fields -->
           <div id="workExperienceContainer">
             <div class="work-experience-entry mb-3 p-3 border rounded">
               <div class="row">
@@ -400,11 +352,12 @@
             </div>
           </div>
           
-          <!-- Declaration -->
+          <!-- Declaration section -->
           <div class="section-title">
             <i class="fas fa-file-signature"></i> Declaration
           </div>
           
+          <!-- Declaration checkbox -->
           <div class="form-check mb-3">
             <input class="form-check-input" type="checkbox" id="declaration" required>
             <label class="form-check-label" for="declaration">
@@ -412,6 +365,7 @@
             </label>
           </div>
           
+          <!-- Form buttons -->
           <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
             <button type="reset" class="btn btn-secondary me-md-2">
               <i class="fas fa-undo"></i> Reset
@@ -422,8 +376,9 @@
           </div>
         </div>
         
-        <!-- Photo Upload Section -->
+        <!-- Right column - Photo upload and tips -->
         <div class="col-lg-3">
+          <!-- Photo upload area -->
           <div class="photo-upload-container">
             <input type="file" id="photoUpload" accept="image/*">
             <div class="photo-upload-icon">
@@ -431,9 +386,8 @@
             </div>
             <img id="photoPreview" class="photo-preview" style="display: none;">
           </div>
-          <div class="text-center mb-4">
-          </div>
           
+          <!-- Tips card -->
           <div class="card mb-4">
             <div class="card-header">
               <i class="fas fa-lightbulb"></i> Tips
@@ -451,17 +405,21 @@
       </div>
     </form>
 
-    <!-- Results Section -->
+    <!-- Results container (hidden initially) -->
     <div id="resultContainer" class="form-container">
       <h3 class="text-center mb-4">Biodata Summary</h3>
       
       <div class="row">
+        <!-- Photo column -->
         <div class="col-md-3 text-center">
           <img id="resultPhoto" src="" alt="Photo" class="result-photo">
         </div>
+        
+        <!-- Information column -->
         <div class="col-md-9">
           <h3 id="resultFullName" class="mb-3"></h3>
           
+          <!-- Personal Information results -->
           <div class="result-section">
             <h5><i class="fas fa-user me-2"></i>Personal Information</h5>
             <div class="row">
@@ -478,6 +436,7 @@
             </div>
           </div>
           
+          <!-- Contact Information results -->
           <div class="result-section">
             <h5><i class="fas fa-address-book me-2"></i>Contact Information</h5>
             <p><strong>Address:</strong> <span id="resultAddress"></span></p>
@@ -492,6 +451,7 @@
             <p><strong>Emergency Contact:</strong> <span id="resultEmergency"></span></p>
           </div>
           
+          <!-- Education results -->
           <div class="result-section">
             <h5><i class="fas fa-graduation-cap me-2"></i>Education</h5>
             <div class="row">
@@ -507,6 +467,7 @@
             <p><strong>Honors/Awards:</strong> <span id="resultHonors"></span></p>
           </div>
           
+          <!-- Work Experience results -->
           <div class="result-section">
             <h5><i class="fas fa-briefcase me-2"></i>Work Experience</h5>
             <div id="resultWorkExperience"></div>
@@ -517,9 +478,12 @@
   </div>
 </div>
 
+<!-- Bootstrap JS bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JavaScript -->
 <script>
-  // Simple photo preview functionality
+  // Handle photo upload and preview
   document.getElementById('photoUpload').addEventListener('change', function(e) {
     const file = e.target.files[0];
     const photoPreview = document.getElementById('photoPreview');
@@ -536,7 +500,7 @@
     }
   });
   
-  // Simple age calculation from date of birth
+  // Calculate age from date of birth
   document.getElementById('dob').addEventListener('change', function() {
     const dob = new Date(this.value);
     const today = new Date();
@@ -550,7 +514,7 @@
     document.getElementById('age').value = age;
   });
 
-  // Show results function
+  // Handle form submission and display results
   function showResults(event) {
     event.preventDefault();
     
@@ -561,7 +525,7 @@
       return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     }
     
-    // Set the photo in the results
+    // Set photo in results
     const photoSrc = document.getElementById('photoPreview').src;
     if (photoSrc) {
       document.getElementById('resultPhoto').src = photoSrc;
@@ -569,12 +533,13 @@
       document.getElementById('resultPhoto').style.display = 'none';
     }
     
-    // Populate the results with form data
+    // Populate all result fields
     document.getElementById('resultFullName').textContent = 
       document.getElementById('firstName').value + ' ' + 
       (document.getElementById('middleName').value ? document.getElementById('middleName').value + ' ' : '') + 
       document.getElementById('lastName').value;
     
+    // Populate personal info results
     document.getElementById('resultAge').textContent = document.getElementById('age').value;
     document.getElementById('resultDob').textContent = formatDate(document.getElementById('dob').value);
     document.getElementById('resultSex').textContent = document.getElementById('sex').value;
@@ -582,11 +547,13 @@
     document.getElementById('resultNationality').textContent = document.getElementById('nationality').value;
     document.getElementById('resultReligion').textContent = document.getElementById('religion').value;
     
+    // Populate contact info results
     document.getElementById('resultAddress').textContent = document.getElementById('address').value;
     document.getElementById('resultEmail').textContent = document.getElementById('email').value;
     document.getElementById('resultContact').textContent = document.getElementById('contact').value;
     document.getElementById('resultEmergency').textContent = document.getElementById('emergency').value;
     
+    // Populate education results
     document.getElementById('resultElem').textContent = document.getElementById('elem').value;
     document.getElementById('resultElemYear').textContent = document.getElementById('elemYear').value;
     document.getElementById('resultHighschool').textContent = document.getElementById('highschool').value;
@@ -596,7 +563,7 @@
     document.getElementById('resultCourse').textContent = document.getElementById('course').value;
     document.getElementById('resultHonors').textContent = document.getElementById('honors').value;
     
-    // Populate work experience
+    // Populate work experience results
     const workExpContainer = document.getElementById('resultWorkExperience');
     workExpContainer.innerHTML = '';
     
@@ -618,10 +585,8 @@
       workExpContainer.innerHTML = workExpHTML;
     }
     
-    // Show the results container
+    // Show results container
     document.getElementById('resultContainer').style.display = 'block';
-    
-    // Scroll to results
     document.getElementById('resultContainer').scrollIntoView({ behavior: 'smooth' });
   }
 </script>
